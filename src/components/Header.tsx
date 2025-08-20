@@ -49,10 +49,19 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
           {user ? (
             <UserMenu>
               <UserButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                <UserAvatar
-                  src={user.avatar || '/default-avatar.png'}
-                  alt={user.username}
-                />
+                {user.avatar ? (
+                  <UserAvatar
+                    src={user.avatar}
+                    alt={user.username}
+                  />
+                ) : (
+                  <UserAvatar
+                    as="div"
+                    alt={user.username}
+                  >
+                    {user.username.charAt(0).toUpperCase()}
+                  </UserAvatar>
+                )}
                 <Username>{user.username}</Username>
               </UserButton>
               
@@ -88,6 +97,14 @@ const HeaderContainer = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
+
+  @media (max-width: 1024px) {
+    padding: 0.75rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem 0;
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -98,9 +115,14 @@ const HeaderWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
     gap: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.25rem;
   }
 `;
 
@@ -109,9 +131,13 @@ const HeaderLeft = styled.div`
   align-items: center;
   gap: 2rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
   }
 `;
 
@@ -129,9 +155,16 @@ const Nav = styled.nav`
   display: flex;
   gap: 1.5rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -154,9 +187,14 @@ const HeaderCenter = styled.div`
   max-width: 400px;
   margin: 0 2rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     margin: 0;
     max-width: 100%;
+    order: 3;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 90%;
   }
 `;
 
@@ -205,7 +243,14 @@ const HeaderRight = styled.div`
   align-items: center;
   gap: 1rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
+    justify-content: center;
+    order: 2;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+    flex-wrap: wrap;
     justify-content: center;
   }
 `;
@@ -213,6 +258,11 @@ const HeaderRight = styled.div`
 const AuthButtons = styled.div`
   display: flex;
   gap: 0.5rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
 `;
 
 const Button = styled.a`
@@ -272,6 +322,13 @@ const UserAvatar = styled.img`
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
 `;
 
 const Username = styled.span`

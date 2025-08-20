@@ -33,7 +33,19 @@ const PostCard: React.FC<PostCardProps> = ({ post, onClick, onToggleFavorite }) 
           <Title>{post.title}</Title>
           <Meta>
             <AuthorInfo>
-              <AuthorAvatar src={post.author.avatar || '/default-avatar.png'} alt={post.author.username} />
+              {post.author.avatar ? (
+                <AuthorAvatar 
+                  src={post.author.avatar} 
+                  alt={post.author.username} 
+                />
+              ) : (
+                <AuthorAvatar
+                  as="div"
+                  alt={post.author.username}
+                >
+                  {post.author.username.charAt(0).toUpperCase()}
+                </AuthorAvatar>
+              )}
               <AuthorName>{post.author.username}</AuthorName>
             </AuthorInfo>
             <DateInfo>{formatDate(post.createdAt)}</DateInfo>
@@ -152,6 +164,14 @@ const AuthorAvatar = styled.img`
   height: 24px;
   border-radius: 50%;
   object-fit: cover;
+  background: #667eea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
 const AuthorName = styled.span`
