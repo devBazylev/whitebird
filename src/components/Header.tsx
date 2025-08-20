@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import type { User } from '../types';
 
@@ -23,11 +24,11 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
         <HeaderLeft>
           <Logo>ForumApp</Logo>
           <Nav>
-            <NavLink href="/">Главная</NavLink>
-            <NavLink href="/favorites">Избранное</NavLink>
-            <NavLink href="/categories">Категории</NavLink>
-            <NavLink href="/users">Пользователи</NavLink>
-            <NavLink href="/about">О форуме</NavLink>
+            <NavLink as={Link} to="/">Главная</NavLink>
+            <NavLink as={Link} to="/favorites">Избранное</NavLink>
+            <NavLink as={Link} to="/categories">Категории</NavLink>
+            <NavLink as={Link} to="/users">Пользователи</NavLink>
+            <NavLink as={Link} to="/about">О форуме</NavLink>
           </Nav>
         </HeaderLeft>
 
@@ -67,9 +68,9 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
               
               {isMenuOpen && (
                 <DropdownMenu>
-                  <DropdownItem href="/profile">Профиль</DropdownItem>
-                  <DropdownItem href="/settings">Настройки</DropdownItem>
-                  <DropdownItem href="/new-post">Новая тема</DropdownItem>
+                  <DropdownItem as={Link} to="/profile">Профиль</DropdownItem>
+                  <DropdownItem as={Link} to="/settings">Настройки</DropdownItem>
+                  <DropdownItem as={Link} to="/new-post">Новая тема</DropdownItem>
                   <DropdownItemLogout onClick={onLogout}>
                     Выйти
                   </DropdownItemLogout>
@@ -78,8 +79,8 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
             </UserMenu>
           ) : (
             <AuthButtons>
-              <ButtonOutline href="/login">Войти</ButtonOutline>
-              <ButtonPrimary href="/register">Регистрация</ButtonPrimary>
+              <ButtonOutline as={Link} to="/login">Войти</ButtonOutline>
+              <ButtonPrimary as={Link} to="/register">Регистрация</ButtonPrimary>
             </AuthButtons>
           )}
         </HeaderRight>
@@ -175,6 +176,7 @@ const NavLink = styled.a`
   border-radius: 6px;
   transition: all 0.3s ease;
   font-weight: 500;
+  display: inline-block;
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
