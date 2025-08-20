@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useForum } from '../context/ForumContext';
+import { useForum } from '../hooks/useForum';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import PostCard from '../components/PostCard';
